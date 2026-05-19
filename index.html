@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Herencia | Club de Campo & Estancia Premium</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind Custom Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        olive: {
+                            50: '#f4f6f4',
+                            100: '#e4eae4',
+                            400: '#738a73',
+                            800: '#445544',
+                            900: '#2c382c',
+                            950: '#1b231b',
+                        },
+                        beige: {
+                            50: '#faf8f5',
+                            100: '#f3eee6',
+                            200: '#e8dfd1',
+                            300: '#dacdb8',
+                            800: '#5c5346',
+                        },
+                        warmWhite: '#F8F7F3',
+                        gold: {
+                            100: '#f6f1e5',
+                            400: '#c5a880',
+                            500: '#bca073',
+                            600: '#a38456',
+                        },
+                        wood: '#8D7B68',
+                        stone: '#D0C9C0'
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'scale-up': 'scaleUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'subtle-drift': 'subtleDrift 20s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        scaleUp: {
+                            '0%': { transform: 'scale(1.08)' },
+                            '100%': { transform: 'scale(1)' },
+                        },
+                        subtleDrift: {
+                            '0%': { transform: 'scale(1) translate(0px, 0px)' },
+                            '100%': { transform: 'scale(1.06) translate(10px, -10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom Core Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F3;
+            color: #2c382c;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        /* Custom Smooth Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F8F7F3;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #445544;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #bca073;
+        }
+
+        /* Cinematic reveal elements style on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1.2s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Gallery Viewer */
+        #galleryModal {
+            transition: opacity 0.3s ease;
+        }
+        #galleryViewerImg {
+            transition: opacity 0.3s ease;
+        }
+        /* Menu Tabs */
+        .tab-btn.active {
+            border-color: #c5a880;
+            color: #2c382c;
+        }
+        .tab-btn {
+            border-color: transparent;
+            color: #5c5346;
+        }
+        .tab-btn:hover {
+            border-color: #c5a880;
+            color: #2c382c;
+        }
+        .menu-item {
+            border-bottom: 1px solid rgba(44, 56, 44, 0.08);
+        }
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        /* Experience Carousel */
+        .exp-carousel {
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .exp-carousel > * {
+            scroll-snap-align: center;
+        }
+        .exp-carousel::-webkit-scrollbar {
+            display: none;
+        }
+        /* Custom Cursor for elegant desktop experience */
+        @media (min-width: 1024px) {
+            .custom-cursor {
+                width: 20px;
+                height: 20px;
+                border: 1px solid #c5a880;
+                border-radius: 50%;
+                position: fixed;
+                transform: translate(-50%, -50%);
+                pointer-events: none;
+                z-index: 9999;
+                transition: width 0.3s, height 0.3s, background-color 0.3s, transform 0.1s ease-out;
+            }
+            .custom-cursor-dot {
+                width: 4px;
+                height: 4px;
+                background-color: #445544;
+                border-radius: 50%;
+                position: fixed;
+                transform: translate(-50%, -50%);
+                pointer-events: none;
+                z-index: 9999;
+                transition: transform 0.05s ease-out;
+            }
+            .hover-active .custom-cursor {
+                width: 50px;
+                height: 50px;
+                background-color: rgba(197, 168, 128, 0.15);
+                border-color: #445544;
+            }
+        }
+
+    </style>
+</head>
+<body class="antialiased selection:bg-gold-400 selection:text-olive-950">
+
+    <!-- Custom Cursor elements (hidden on mobile) -->
+    <div class="custom-cursor hidden lg:block" id="customCursor"></div>
+    <div class="custom-cursor-dot hidden lg:block" id="customCursorDot"></div>
+
+    <!-- Cinematic Preloader -->
+    <div id="preloader" class="fixed inset-0 z-[9999] bg-olive-950 flex flex-col items-center justify-center transition-all duration-1000 ease-in-out">
+        <div class="text-center px-6">
+            <div class="mb-4 overflow-hidden">
+                <p class="text-gold-400 tracking-[0.4em] uppercase text-xs sm:text-sm animate-pulse">Estancia & Polo Club</p>
+            </div>
+            <div class="overflow-hidden mb-6 h-[1px] w-32 bg-gold-400/20 mx-auto relative">
+                <div class="absolute inset-y-0 left-0 bg-gold-400 w-1/2 animate-[subtleDrift_2s_infinite]"></div>
+            </div>
+            <h1 class="text-warmWhite text-4xl sm:text-6xl font-light tracking-wide italic font-serif opacity-0 translate-y-4 transition-all duration-1000 ease-out delay-300" id="preloadLogo">
+                La Herencia
+            </h1>
+            <p class="text-beige-300/60 font-serif text-sm italic mt-2 opacity-0 transition-all duration-1000 delay-500" id="preloadSub">Argentina</p>
+        </div>
+    </div>
+
+    <!-- Header / Rounded Glassmorphism Pill -->
+    <header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-500 ease-in-out py-2 lg:py-4 px-3 lg:px-6">
+        <div class="max-w-7xl mx-auto bg-olive-950/70 backdrop-blur-xl border border-warmWhite/10 rounded-2xl lg:rounded-full px-4 lg:px-6 py-2.5 lg:py-2 flex items-center justify-between shadow-2xl transition-all duration-500">
+            <!-- Brand Logo -->
+            <a href="#" class="group text-warmWhite flex flex-col items-start focus:outline-none transition-transform duration-300 active:scale-95 shrink-0">
+                <span class="font-serif text-xl lg:text-2xl font-light tracking-wide group-hover:text-gold-400 transition-colors duration-300 leading-tight">La Herencia</span>
+                <span class="text-[7px] lg:text-[8px] tracking-[0.3em] uppercase text-gold-400 group-hover:text-warmWhite transition-colors duration-300 leading-none">Club de Campo</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden lg:flex items-center space-x-1 xl:space-x-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-warmWhite">
+                <a href="#inicio" class="hover:text-gold-400 transition-colors duration-300 px-2 py-1.5">Inicio</a>
+                <a href="#sobre-nosotros" class="hover:text-gold-400 transition-colors duration-300 px-2 py-1.5">El Club</a>
+                <a href="#experiencias" class="hover:text-gold-400 transition-colors duration-300 px-2 py-1.5">Experiencias</a>
+                <a href="#gastronomia" class="hover:text-gold-400 transition-colors duration-300 px-2 py-1.5">Gastronomía</a>
+                <a href="#polo" class="hover:text-gold-400 transition-colors duration-300 px-2 py-1.5">Polo</a>
+                <a href="#piscinas" class="hover:text-gold-400 transition-colors duration-300 px-2 py-1.5">Relax</a>
+                <a href="#eventos" class="hover:text-gold-400 transition-colors duration-300 px-2 py-1.5">Eventos</a>
+                <a href="#galeria" class="hover:text-gold-400 transition-colors duration-300 px-2 py-1.5">Galería</a>
+            </nav>
+
+            <!-- Book Action & Mobile Toggle -->
+            <div class="flex items-center space-x-2 shrink-0">
+                <button onclick="openBooking()" class="bg-gold-400 hover:bg-gold-500 text-olive-950 font-semibold text-[10px] tracking-[0.15em] uppercase px-4 lg:px-5 py-2 rounded-full transition-all duration-300 shadow-md hover:shadow-gold-500/20 hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap">
+                    Reservar
+                </button>
+                <button id="mobileMenuBtn" class="lg:hidden text-warmWhite hover:text-gold-400 focus:outline-none p-1.5" aria-label="Menu">
+                    <i class="fa-solid fa-bars-staggered text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Fullscreen Menu Drawer -->
+    <div id="mobileDrawer" class="fixed inset-0 z-40 bg-olive-950/98 backdrop-blur-xl translate-x-full transition-transform duration-500 ease-in-out flex flex-col justify-between p-8 pt-28">
+        <nav class="flex flex-col space-y-6 text-center">
+            <a href="#inicio" onclick="toggleMobileMenu()" class="font-serif text-3xl text-warmWhite hover:text-gold-400 transition-colors duration-300">Inicio</a>
+            <a href="#sobre-nosotros" onclick="toggleMobileMenu()" class="font-serif text-3xl text-warmWhite hover:text-gold-400 transition-colors duration-300">El Club</a>
+            <a href="#experiencias" onclick="toggleMobileMenu()" class="font-serif text-3xl text-warmWhite hover:text-gold-400 transition-colors duration-300">Experiencias</a>
+            <a href="#gastronomia" onclick="toggleMobileMenu()" class="font-serif text-3xl text-warmWhite hover:text-gold-400 transition-colors duration-300">Gastronomía</a>
+            <a href="#polo" onclick="toggleMobileMenu()" class="font-serif text-3xl text-warmWhite hover:text-gold-400 transition-colors duration-300">Polo & Ecuestre</a>
+            <a href="#piscinas" onclick="toggleMobileMenu()" class="font-serif text-3xl text-warmWhite hover:text-gold-400 transition-colors duration-300">Relax & Piscinas</a>
+            <a href="#eventos" onclick="toggleMobileMenu()" class="font-serif text-3xl text-warmWhite hover:text-gold-400 transition-colors duration-300">Eventos</a>
+            <a href="#galeria" onclick="toggleMobileMenu()" class="font-serif text-3xl text-warmWhite hover:text-gold-400 transition-colors duration-300">Galería del Campo</a>
+        </nav>
+        <div class="text-center space-y-6">
+            <button onclick="toggleMobileMenu(); openBooking();" class="w-full bg-gold-400 text-olive-950 font-semibold text-xs tracking-widest uppercase py-4 rounded-full transition-all">
+                Reservar Experiencia
+            </button>
+            <div class="flex justify-center space-x-6 text-warmWhite/60">
+                <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-instagram text-xl"></i></a>
+                <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-facebook-f text-xl"></i></a>
+                <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-solid fa-envelope text-xl"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1. Hero Section Cinematográfico -->
+    <section id="inicio" class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-olive-950">
+        <!-- Cinematic Background Image with drift animation -->
+        <div class="absolute inset-0 z-0">
+            <video autoplay muted loop playsinline 
+                   class="w-full h-full object-cover object-center opacity-40 animate-subtle-drift select-none"
+                   onerror="this.style.display='none'">
+                <source src="./public/hero/videohero.mp4" type="video/mp4">
+            </video>
+                        <img src="./public/hero/poster.jpg" 
+                 alt="Paisaje de estancia argentina y caballos al amanecer" 
+                 class="w-full h-full object-cover object-center opacity-40 animate-subtle-drift select-none"
+                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=2000'"
+                 id="heroFallbackImg">
+            <div class="absolute inset-0 bg-gradient-to-t from-olive-950 via-olive-950/40 to-olive-950/60 z-10"></div>
+        </div>
+
+        <!-- Hero Content container -->
+        <div class="relative z-20 text-center px-6 max-w-5xl mx-auto flex flex-col items-center">
+            <span class="inline-block text-gold-400 uppercase tracking-[0.35em] text-xs sm:text-sm mb-4 font-semibold animate-fade-in-up">
+                Estancia de Lujo & Tradición Argentina
+            </span>
+            <h2 class="font-serif text-4xl sm:text-6xl md:text-8xl text-warmWhite font-light tracking-wide leading-none mb-6 animate-fade-in-up delay-200">
+                Donde la tradición, el deporte <br class="hidden md:inline"><span class="italic text-gold-100 font-light">y la naturaleza se encuentran.</span>
+            </h2>
+            <p class="text-beige-100/80 font-sans max-w-2xl text-sm sm:text-base md:text-lg font-light tracking-wide mb-10 leading-relaxed animate-fade-in-up delay-500">
+                Ubicada en las pampas doradas de Buenos Aires, una finca icónica que redefine la exclusividad, la pasión ecuestre y la alta gastronomía de campo.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full sm:w-auto animate-fade-in-up delay-700">
+                <button onclick="openBooking()" class="bg-gold-400 hover:bg-gold-500 text-olive-950 font-semibold tracking-wider text-xs uppercase px-8 py-4 rounded-full transition-all duration-300 shadow-xl hover:shadow-gold-500/20 hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto">
+                    Reservar Experiencia
+                </button>
+                <a href="#sobre-nosotros" class="border border-warmWhite/30 hover:border-gold-400 hover:bg-warmWhite/5 text-warmWhite font-semibold tracking-wider text-xs uppercase px-8 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center space-x-2 w-full sm:w-auto">
+                    <span>Conocer el Club</span>
+                    <i class="fa-solid fa-arrow-right text-[10px] ml-1"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center space-y-2 opacity-70 hover:opacity-100 transition-opacity">
+            <span class="text-[9px] text-beige-100 tracking-[0.2em] uppercase">Deslizar</span>
+            <div class="w-[1px] h-12 bg-warmWhite/30 relative overflow-hidden">
+                <div class="absolute top-0 left-0 right-0 h-4 bg-gold-400 animate-[bounce_1.5s_infinite]"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cintilla Glassmorph Autoplay -->
+    <section id="cintillaSection" class="relative z-10">
+        <div class="bg-white/40 backdrop-blur-xl border-y border-white/30 py-4 lg:py-5 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 lg:px-16 flex items-center justify-center lg:justify-between gap-4 lg:gap-8">
+                <span class="hidden lg:inline text-[9px] uppercase tracking-[0.4em] text-olive-800/40 font-semibold shrink-0">Viví</span>
+                <div class="flex items-center gap-3 lg:gap-6 overflow-hidden">
+                    <span id="cintillaPrev" class="text-[10px] lg:text-xs text-olive-800/40 uppercase tracking-[0.15em] whitespace-nowrap transition-all duration-300 hidden sm:inline"></span>
+                    <span id="cintillaPrevBar" class="w-px h-4 bg-gold-400/60 hidden sm:inline-block"></span>
+                    <span id="cintillaText" class="text-sm lg:text-base text-olive-900 font-semibold uppercase tracking-[0.1em] whitespace-nowrap transition-all duration-300">Club de Campo</span>
+                    <span class="w-px h-5 bg-gold-400/60"></span>
+                    <span id="cintillaNext" class="text-[10px] lg:text-xs text-olive-800/40 uppercase tracking-[0.15em] whitespace-nowrap transition-all duration-300 hidden sm:inline"></span>
+                </div>
+                <div class="flex gap-1.5 sm:hidden">
+                    <span class="w-1.5 h-1.5 rounded-full bg-gold-400 transition-all"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-olive-800/20 transition-all"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-olive-800/20 transition-all"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-olive-800/20 transition-all"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-olive-800/20 transition-all"></span>
+                </div>
+                <span class="hidden lg:inline text-[9px] uppercase tracking-[0.4em] text-olive-800/40 font-semibold shrink-0">La Herencia</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Sobre El Club -->
+    <section id="sobre-nosotros" class="py-16 lg:py-32 px-6 lg:px-16 bg-warmWhite relative overflow-hidden">
+        <!-- Absolute subtle gold leaf decor in bg -->
+        <div class="absolute -right-24 top-1/4 text-olive-100 opacity-20 pointer-events-none select-none">
+            <i class="fa-solid fa-leaf text-[300px]"></i>
+        </div>
+
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+                
+                <!-- Left Column Text Editorial style -->
+                <div class="lg:col-span-5 space-y-8 reveal text-center lg:text-left">
+                    <div class="space-y-3">
+                        <span class="text-gold-600 uppercase tracking-widest text-xs font-semibold block">La Estancia Boutique</span>
+                        <h3 class="font-serif text-4xl lg:text-5xl text-olive-900 leading-tight">
+                            Un refugio inmaculado de <span class="italic font-normal">privacidad y esplendor silvestre.</span>
+                        </h3>
+                    </div>
+                    
+                    <div class="w-16 h-[1px] bg-gold-400 mx-auto lg:mx-0"></div>
+                    
+                    <p class="text-olive-800/80 leading-relaxed text-sm lg:text-base space-y-4">
+                        Fundado bajo los pilares de la herencia criolla y la sofisticación cosmopolita, La Herencia emerge como un enclave sublime de descanso en la provincia. 
+                        Un espacio diseñado exclusivamente para socios e invitados distinguidos que buscan sintonizar con el pulso noble del campo argentino.
+                    </p>
+                    <p class="text-olive-800/80 leading-relaxed text-sm lg:text-base">
+                        Nuestras hectáreas preservan una forestación centenaria, canchas de polo de nivel mundial, una icónica casona de estilo tudor y una gastronomía que enaltece el fuego y la tierra.
+                    </p>
+
+                    <!-- Core highlights list -->
+                    <div class="grid grid-cols-2 gap-6 pt-4 justify-items-center lg:justify-items-start">
+                        <div class="flex items-start space-x-3 text-left">
+                            <span class="text-gold-500 mt-1 shrink-0"><i class="fa-regular fa-compass text-lg"></i></span>
+                            <div>
+                                <h4 class="font-semibold text-olive-900 text-sm text-center lg:text-left">Ubicación Sublime</h4>
+                                <p class="text-xs text-olive-800/70 text-center lg:text-left">A solo una hora de la metrópoli.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3 text-left">
+                            <span class="text-gold-500 mt-1 shrink-0"><i class="fa-solid fa-shield-halved text-lg"></i></span>
+                            <div>
+                                <h4 class="font-semibold text-olive-900 text-sm text-center lg:text-left">Privacidad Total</h4>
+                                <p class="text-xs text-olive-800/70 text-center lg:text-left">Acceso restringido y membresía exclusiva.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column Split Editorial Grid -->
+                <div class="lg:col-span-7 grid grid-cols-12 gap-4 lg:gap-6 relative">
+                    <!-- Subtle frame accent -->
+                    <div class="absolute -inset-4 border border-gold-400/20 rounded-2xl pointer-events-none"></div>
+
+                    <!-- Main elegant picture -->
+                    <div class="col-span-8 overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 group reveal">
+                        <img src="./public/sobre-nosotros/Imagen1elclub-.png" 
+                             alt="Casona del club" 
+                             class="w-full h-full object-cover aspect-[4/5] group-hover:scale-105 transition-transform duration-700"
+                             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1200'">
+                    </div>
+
+                    <!-- Side complementary picture -->
+                    <div class="col-span-4 flex flex-col justify-end space-y-4 lg:space-y-6">
+                        <div class="overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 group reveal delay-100">
+                            <img src="./public/sobre-nosotros/imagen2-elclub.png" 
+                                 alt="Detalle de caballos" 
+                                 class="w-full h-full object-cover aspect-[3/4] group-hover:scale-105 transition-transform duration-700"
+                                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?q=80&w=800'">
+                        </div>
+                        <div class="overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 group reveal delay-200">
+                            <img src="./public/sobre-nosotros/imagen3-elclub.png" 
+                                 alt="Copa de vino malbec" 
+                                 class="w-full h-full object-cover aspect-[1/1] group-hover:scale-105 transition-transform duration-700"
+                                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800'">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Experiencias y Actividades -->
+    <section id="experiencias" class="py-16 lg:py-32 px-6 lg:px-16 bg-olive-950 text-warmWhite relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-20 reveal">
+                <span class="text-gold-400 uppercase tracking-widest text-xs font-semibold block mb-2">Un Estilo de Vida</span>
+                <h3 class="font-serif text-4xl lg:text-5xl text-warmWhite">Experiencias Firmadas</h3>
+                <div class="w-12 h-[1px] bg-gold-400 mx-auto mt-4 mb-6"></div>
+                <p class="text-beige-100/70 text-sm lg:text-base font-light">
+                    Cada rincón de La Herencia propone una inmersión única de disfrute sensorial y sosiego. Viva el lujo rústico en su máxima expresión.
+                </p>
+            </div>
+
+            <!-- Experience Dynamic Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1: Polo Club -->
+                <div class="group relative h-[450px] rounded-2xl overflow-hidden shadow-lg border border-warmWhite/5 hover:border-gold-400/30 transition-all duration-500 flex flex-col justify-end p-8 reveal">
+                    <div class="absolute inset-0 z-0">
+                        <img src="./public/experiencias/polodeclasemundial.webp" alt="Polo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?q=80&w=800'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-olive-950 via-olive-950/40 to-transparent z-10"></div>
+                    </div>
+                    <div class="relative z-20 space-y-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <span class="text-gold-400 uppercase tracking-widest text-[10px] font-semibold">Deportes de Reyes</span>
+                        <h4 class="font-serif text-2xl text-warmWhite">Polo de Clase Mundial</h4>
+                        <p class="text-xs text-beige-100/75 opacity-0 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed">
+                            Aprenda y juegue en canchas profesionales con la guía de campeones del circuito argentino de polo.
+                        </p>
+                        <button onclick="openExperienceModal(this)" class="pt-2 flex items-center space-x-2 text-gold-400 text-xs font-semibold tracking-wider uppercase cursor-pointer group w-full text-left">
+                            <span>Saber Más</span>
+                            <i class="fa-solid fa-chevron-right text-[8px] group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2: Cabalgatas -->
+                <div class="group relative h-[450px] rounded-2xl overflow-hidden shadow-lg border border-warmWhite/5 hover:border-gold-400/30 transition-all duration-500 flex flex-col justify-end p-8 reveal delay-100">
+                    <div class="absolute inset-0 z-0">
+                        <img src="./public/experiencias/Cabalgataalatardecer.jpg" alt="Cabalgatas" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=800'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-olive-950 via-olive-950/40 to-transparent z-10"></div>
+                    </div>
+                    <div class="relative z-20 space-y-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <span class="text-gold-400 uppercase tracking-widest text-[10px] font-semibold">Aventura Ecuestre</span>
+                        <h4 class="font-serif text-2xl text-warmWhite">Cabalgatas al Atardecer</h4>
+                        <p class="text-xs text-beige-100/75 opacity-0 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed">
+                            Recorra las arboledas centenarias e históricos senderos pampeanos guiados por hábiles jinetes locales.
+                        </p>
+                        <button onclick="openExperienceModal(this)" class="pt-2 flex items-center space-x-2 text-gold-400 text-xs font-semibold tracking-wider uppercase cursor-pointer group w-full text-left">
+                            <span>Saber Más</span>
+                            <i class="fa-solid fa-chevron-right text-[8px] group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 3: Restaurante & Parrilla -->
+                <div class="group relative h-[450px] rounded-2xl overflow-hidden shadow-lg border border-warmWhite/5 hover:border-gold-400/30 transition-all duration-500 flex flex-col justify-end p-8 reveal delay-200">
+                    <div class="absolute inset-0 z-0">
+                        <img src="./public/experiencias/parrillapremiumycava.jpg" alt="Gastronomía" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-olive-950 via-olive-950/40 to-transparent z-10"></div>
+                    </div>
+                    <div class="relative z-20 space-y-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <span class="text-gold-400 uppercase tracking-widest text-[10px] font-semibold">Alta Cocina</span>
+                        <h4 class="font-serif text-2xl text-warmWhite">Parrilla Premium & Cava</h4>
+                        <p class="text-xs text-beige-100/75 opacity-0 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed">
+                            Cortes madurados cocidos lentamente a la leña, acompañados por joyas de la viticultura argentina.
+                        </p>
+                        <button onclick="openExperienceModal(this)" class="pt-2 flex items-center space-x-2 text-gold-400 text-xs font-semibold tracking-wider uppercase cursor-pointer group w-full text-left">
+                            <span>Saber Más</span>
+                            <i class="fa-solid fa-chevron-right text-[8px] group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 4: Piscinas de Verano -->
+                <div class="group relative h-[450px] rounded-2xl overflow-hidden shadow-lg border border-warmWhite/5 hover:border-gold-400/30 transition-all duration-500 flex flex-col justify-end p-8 reveal">
+                    <div class="absolute inset-0 z-0">
+                        <img src="./public/experiencias/piscinas.jpg" alt="Piscinas" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=800'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-olive-950 via-olive-950/40 to-transparent z-10"></div>
+                    </div>
+                    <div class="relative z-20 space-y-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <span class="text-gold-400 uppercase tracking-widest text-[10px] font-semibold">Resort de Bienestar</span>
+                        <h4 class="font-serif text-2xl text-warmWhite">Oasis & Solarium</h4>
+                        <p class="text-xs text-beige-100/75 opacity-0 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed">
+                            Piscinas cristalinas bordeadas de reposeras refinadas y barra de coctelería botánica.
+                        </p>
+                        <button onclick="openExperienceModal(this)" class="pt-2 flex items-center space-x-2 text-gold-400 text-xs font-semibold tracking-wider uppercase cursor-pointer group w-full text-left">
+                            <span>Saber Más</span>
+                            <i class="fa-solid fa-chevron-right text-[8px] group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 5: Eventos de Élite -->
+                <div class="group relative h-[450px] rounded-2xl overflow-hidden shadow-lg border border-warmWhite/5 hover:border-gold-400/30 transition-all duration-500 flex flex-col justify-end p-8 reveal delay-100">
+                    <div class="absolute inset-0 z-0">
+                        <img src="./public/experiencias/eventos.jpg" alt="Eventos" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=800'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-olive-950 via-olive-950/40 to-transparent z-10"></div>
+                    </div>
+                    <div class="relative z-20 space-y-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <span class="text-gold-400 uppercase tracking-widest text-[10px] font-semibold">Celebraciones</span>
+                        <h4 class="font-serif text-2xl text-warmWhite">Fiestas & Bodas Privadas</h4>
+                        <p class="text-xs text-beige-100/75 opacity-0 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed">
+                            Bodas memorables y galas corporativas enmarcadas por majestuosos horizontes verdes.
+                        </p>
+                        <button onclick="openExperienceModal(this)" class="pt-2 flex items-center space-x-2 text-gold-400 text-xs font-semibold tracking-wider uppercase cursor-pointer group w-full text-left">
+                            <span>Saber Más</span>
+                            <i class="fa-solid fa-chevron-right text-[8px] group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 6: Actividades Familiares -->
+                <div class="group relative h-[450px] rounded-2xl overflow-hidden shadow-lg border border-warmWhite/5 hover:border-gold-400/30 transition-all duration-500 flex flex-col justify-end p-8 reveal delay-200">
+                    <div class="absolute inset-0 z-0">
+                        <img src="./public/experiencias/Recreacion.png" alt="Familia" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=800'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-olive-950 via-olive-950/40 to-transparent z-10"></div>
+                    </div>
+                    <div class="relative z-20 space-y-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <span class="text-gold-400 uppercase tracking-widest text-[10px] font-semibold">Legado Familiar</span>
+                        <h4 class="font-serif text-2xl text-warmWhite">Recreación & Club House</h4>
+                        <p class="text-xs text-beige-100/75 opacity-0 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed">
+                            Deportes al aire libre, club de niños, canchas de tenis de polvo de ladrillo e integración social.
+                        </p>
+                        <button onclick="openExperienceModal(this)" class="pt-2 flex items-center space-x-2 text-gold-400 text-xs font-semibold tracking-wider uppercase cursor-pointer group w-full text-left">
+                            <span>Saber Más</span>
+                            <i class="fa-solid fa-chevron-right text-[8px] group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Gastronomía Premium -->
+    <section id="gastronomia" class="py-16 lg:py-32 px-6 lg:px-16 bg-beige-100 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                
+                <!-- Large Image Container -->
+                <div class="lg:col-span-6 relative reveal">
+                    <!-- Decorative back frame -->
+                    <div class="absolute -top-4 -left-4 w-1/2 h-full border-l-2 border-t-2 border-gold-400 rounded-tl-2xl"></div>
+                    <div class="absolute -bottom-4 -right-4 w-1/2 h-full border-r-2 border-b-2 border-gold-400 rounded-br-2xl"></div>
+                    
+                    <div class="overflow-hidden rounded-2xl shadow-2xl relative group">
+                        <div class="relative overflow-hidden aspect-[4/3]">
+                            <div id="gastroCarousel" class="flex transition-transform duration-700 ease-in-out h-full">
+                                <img src="./public/gastronomia/imagen1-gastronomia.png" alt="Parrilla gourmet" class="w-full h-full object-cover shrink-0" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1200'">
+                                <img src="./public/gastronomia/imagen2-gastronomia.png" alt="Cortes madurados" class="w-full h-full object-cover shrink-0" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200'">
+                                <img src="./public/gastronomia/imagen3gastronomia.png" alt="Copa de vino" class="w-full h-full object-cover shrink-0" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1200'">
+                                <img src="./public/gastronomia/imagen1-gastronomia.png" alt="Asado criollo" class="w-full h-full object-cover shrink-0" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1200'">
+                            </div>
+                            <div class="absolute inset-0 bg-black/10 pointer-events-none"></div>
+                        </div>
+                        <button onclick="gastroPrev()" class="absolute left-3 top-1/2 -translate-y-1/2 z-10 bg-warmWhite/80 text-olive-900 w-9 h-9 rounded-full flex items-center justify-center hover:bg-warmWhite transition-all shadow-md opacity-0 group-hover:opacity-100">
+                            <i class="fa-solid fa-chevron-left text-sm"></i>
+                        </button>
+                        <button onclick="gastroNext()" class="absolute right-3 top-1/2 -translate-y-1/2 z-10 bg-warmWhite/80 text-olive-900 w-9 h-9 rounded-full flex items-center justify-center hover:bg-warmWhite transition-all shadow-md opacity-0 group-hover:opacity-100">
+                            <i class="fa-solid fa-chevron-right text-sm"></i>
+                        </button>
+                        <div class="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-gold-400 transition-all cursor-pointer" onclick="gastroGo(0)"></span>
+                            <span class="w-2 h-2 rounded-full bg-warmWhite/60 transition-all cursor-pointer" onclick="gastroGo(1)"></span>
+                            <span class="w-2 h-2 rounded-full bg-warmWhite/60 transition-all cursor-pointer" onclick="gastroGo(2)"></span>
+                            <span class="w-2 h-2 rounded-full bg-warmWhite/60 transition-all cursor-pointer" onclick="gastroGo(3)"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Presentation Editorial -->
+                <div class="lg:col-span-6 space-y-8 reveal text-center lg:text-left">
+                    <div class="space-y-3">
+                        <span class="text-gold-600 uppercase tracking-widest text-xs font-semibold block">El Fuego y la Tradición</span>
+                        <h3 class="font-serif text-4xl lg:text-5xl text-olive-900 leading-tight">
+                            Gastronomía Autóctona de <span class="italic font-normal">Siete Fuegos</span>
+                        </h3>
+                    </div>
+
+                    <p class="text-olive-800/80 leading-relaxed text-sm lg:text-base">
+                        Un tributo culinario a las brasas y a la rica ganadería argentina. En nuestro restaurante, chefs de renombre reinterpretan las técnicas criollas clásicas en un entorno de piedra rústica y mantelería fina.
+                    </p>
+
+                    <!-- Icons highlights -->
+                    <div class="space-y-4 flex flex-col items-center lg:items-start">
+                        <div class="flex items-center space-x-4 border-b border-olive-900/10 pb-4">
+                            <span class="w-10 h-10 flex items-center justify-center bg-olive-800 text-warmWhite rounded-full text-sm">
+                                <i class="fa-solid fa-fire"></i>
+                            </span>
+                            <div>
+                                <h4 class="font-semibold text-olive-900 text-sm">Asados de Autor</h4>
+                                <p class="text-xs text-olive-800/70">Cortes seleccionados madurados durante 35 días.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 border-b border-olive-900/10 pb-4">
+                            <span class="w-10 h-10 flex items-center justify-center bg-olive-800 text-warmWhite rounded-full text-sm">
+                                <i class="fa-solid fa-wine-glass"></i>
+                            </span>
+                            <div>
+                                <h4 class="font-semibold text-olive-900 text-sm">Cava Subterránea</h4>
+                                <p class="text-xs text-olive-800/70">Más de 300 etiquetas de Malbec, Cabernet y espumantes icónicos.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span class="w-10 h-10 flex items-center justify-center bg-olive-800 text-warmWhite rounded-full text-sm">
+                                <i class="fa-solid fa-ice-cream"></i>
+                            </span>
+                            <div>
+                                <h4 class="font-semibold text-olive-900 text-sm">Pastelería Criolla</h4>
+                                <p class="text-xs text-olive-800/70">Dulce de leche artesanal, chocolates y postres de campo sublimes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 flex flex-col sm:flex-row items-center gap-3">
+                        <button onclick="openBooking()" class="bg-olive-800 hover:bg-olive-900 text-warmWhite font-semibold tracking-wider text-xs uppercase px-8 py-4 rounded-full transition-all duration-300">
+                            Reservar una Mesa
+                        </button>
+                        <button onclick="openMenuModal()" class="border-2 border-olive-800 text-olive-800 hover:bg-olive-800 hover:text-warmWhite font-semibold tracking-wider text-xs uppercase px-8 py-4 rounded-full transition-all duration-300">
+                            <i class="fa-regular fa-receipt mr-1.5"></i>Ver Menú
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Polo & Experiencia Ecuestre (Split Screen Design) -->
+    <section id="polo" class="relative overflow-hidden bg-olive-900 text-warmWhite">
+        <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[600px] items-stretch">
+            
+            <!-- Left Side: Dark Majestic Editorial Text -->
+            <div class="flex flex-col justify-center px-6 lg:px-20 py-20 lg:py-0 space-y-8 bg-olive-950 relative z-10 reveal text-center lg:text-left">
+                <!-- Background subtle watermark texture -->
+                <div class="absolute inset-0 bg-[radial-gradient(#445544_1px,transparent_1px)] [background-size:16px_16px] opacity-10 pointer-events-none"></div>
+                
+                <div class="relative z-10 space-y-6">
+                    <span class="text-gold-400 uppercase tracking-widest text-xs font-semibold block">La Cuna de Reyes</span>
+                    <h3 class="font-serif text-4xl lg:text-6xl text-warmWhite leading-tight">
+                        La Nobleza de <br>
+                        <span class="italic font-light">Nuestras Caballerizas</span>
+                    </h3>
+                    <div class="w-16 h-[1px] bg-gold-400"></div>
+                    <p class="text-beige-100/80 leading-relaxed text-sm lg:text-base font-light">
+                        La herencia criolla y la devoción ecuestre se respiran en cada galope. Nuestras caballerizas albergan ejemplares de pura sangre adiestrados meticulosamente por expertos criadores nacionales. 
+                    </p>
+                    <p class="text-beige-100/70 leading-relaxed text-sm">
+                        Aquí, el polo no es solo un pasatiempo, sino una liturgia que se vive cada tarde, culminando con la copa de honor en el mirador privado frente a las canchas oficiales de juego.
+                    </p>
+
+                    <!-- Stats Row -->
+                    <div class="grid grid-cols-3 gap-6 pt-6 text-center lg:text-left border-t border-warmWhite/10">
+                        <div>
+                            <span class="block font-serif text-3xl lg:text-4xl text-gold-400 font-light">3</span>
+                            <span class="text-[10px] uppercase tracking-widest text-beige-100/60">Canchas Oficiales</span>
+                        </div>
+                        <div>
+                            <span class="block font-serif text-3xl lg:text-4xl text-gold-400 font-light">40+</span>
+                            <span class="text-[10px] uppercase tracking-widest text-beige-100/60">Equinos de Elite</span>
+                        </div>
+                        <div>
+                            <span class="block font-serif text-3xl lg:text-4xl text-gold-400 font-light">12</span>
+                            <span class="text-[10px] uppercase tracking-widest text-beige-100/60">Box Profesionales</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Cinematic Video of Horse/Polo in Sunset -->
+            <div class="relative min-h-[400px] lg:min-h-full overflow-hidden reveal">
+                <video autoplay muted loop playsinline
+                       class="absolute inset-0 w-full h-full object-cover object-center select-none hover:scale-105 transition-transform duration-[2s]"
+                       onerror="this.style.display='none'">
+                    <source src="./public/polo/videoseccionpolo.mp4" type="video/mp4">
+                </video>
+                <img src="./public/polo/poster.jpg" 
+                     alt="Caballos al atardecer en estancia" 
+                     class="absolute inset-0 w-full h-full object-cover object-center select-none hover:scale-105 transition-transform duration-[2s]"
+                     onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1518467166-765a0101cc9f?q=80&w=1200'"
+                     id="poloFallbackImg">
+                <div class="absolute inset-0 bg-gradient-to-r from-olive-950/80 via-transparent to-transparent lg:block hidden"></div>
+                <!-- Interactive "Play" indicator in corner -->
+                <div class="absolute bottom-6 right-6 flex items-center space-x-3 bg-black/45 backdrop-blur-md px-4 py-2 rounded-full border border-warmWhite/10">
+                    <span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-ping"></span>
+                    <span class="text-[10px] uppercase tracking-widest font-semibold">Copa Coronel Abierta</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 6. Piscinas de Verano & Resort (Aesthetic Bright Design) -->
+    <section id="piscinas" class="py-16 lg:py-32 px-6 lg:px-16 bg-warmWhite relative">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 lg:mb-20 reveal text-center lg:text-left">
+                <div class="space-y-4 max-w-xl mx-auto lg:mx-0">
+                    <span class="text-gold-600 uppercase tracking-widest text-xs font-semibold block">Oasis de Calma</span>
+                    <h3 class="font-serif text-4xl lg:text-5xl text-olive-900 leading-tight">
+                        La Serena Claridad <br>
+                        <span class="italic font-light">del Estío y la Brisa</span>
+                    </h3>
+                </div>
+                <p class="text-olive-800/80 max-w-md text-sm lg:text-base mt-6 lg:mt-0 leading-relaxed font-light mx-auto lg:mx-0">
+                    Sienta el frescor del agua bajo el domo azul infinito de la pampa. Nuestras piscinas están integradas al entorno natural para propiciar el máximo descanso físico y mental.
+                </p>
+            </div>
+
+            <!-- Split layouts for luxury pool features -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Large landscape visual -->
+                <div class="lg:col-span-8 overflow-hidden rounded-2xl shadow-xl relative group reveal">
+                    <img src="./public/piscinas/relax.png" 
+                         alt="Piscina infinity pool" 
+                         class="w-full h-[450px] object-cover group-hover:scale-105 transition-transform duration-1000"
+                         onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1200'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-8">
+                        <div>
+                            <h4 class="font-serif text-2xl text-warmWhite">Infinity Pool sobre el Valle</h4>
+                            <p class="text-beige-100/80 text-xs mt-1">Vistas panorámicas hacia los campos de siembra centenarios.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Side portrait texturized box -->
+                <div class="lg:col-span-4 bg-olive-800 text-warmWhite rounded-2xl p-8 lg:p-12 flex flex-col justify-between shadow-xl reveal delay-150">
+                    <div class="space-y-6">
+                        <i class="fa-solid fa-umbrella-beach text-gold-400 text-3xl"></i>
+                        <h4 class="font-serif text-3xl">Lujo Solarium</h4>
+                        <p class="text-beige-100/80 text-sm leading-relaxed font-light">
+                            Reposeras artesanales de madera de cedro, servicio privado de toallas e infusiones naturales frías preparadas con hierbas de nuestra propia huerta orgánica.
+                        </p>
+                    </div>
+                    <ul class="space-y-3 pt-6 border-t border-warmWhite/10 text-xs text-beige-200">
+                        <li class="flex items-center space-x-2">
+                            <i class="fa-solid fa-check text-gold-400"></i>
+                            <span>Atención dedicada de solarium</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fa-solid fa-check text-gold-400"></i>
+                            <span>Jacuzzi térmico al aire libre</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fa-solid fa-check text-gold-400"></i>
+                            <span>Barra de cócteles botánicos exclusivos</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 7. Eventos & Grandes Ocasiones -->
+    <section id="eventos" class="py-16 lg:py-32 px-6 lg:px-16 bg-beige-200 relative overflow-hidden">
+        <!-- Overlay vector background lines -->
+        <div class="absolute inset-0 opacity-5 pointer-events-none">
+            <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                <line x1="0" y1="100" x2="100%" y2="500" stroke="#445544" stroke-width="1"/>
+                <line x1="100%" y1="0" x2="0" y2="600" stroke="#445544" stroke-width="1"/>
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                
+                <!-- Left Details Text Content -->
+                <div class="space-y-8 order-2 lg:order-1 reveal text-center lg:text-left">
+                    <div class="space-y-3">
+                        <span class="text-gold-600 uppercase tracking-widest text-xs font-semibold block">Momentos Memorables</span>
+                        <h3 class="font-serif text-4xl lg:text-5xl text-olive-900 leading-tight">
+                            Celebraciones Soñadas en el <span class="italic font-light">Corazón de la Pampa</span>
+                        </h3>
+                    </div>
+                    
+                    <p class="text-olive-800/80 leading-relaxed text-sm lg:text-base">
+                        Ofrecemos un escenario inigualable para bodas, aniversarios y encuentros corporativos de alto perfil. Nuestras instalaciones combinan salones cubiertos de refinado estilo arquitectónico colonial con majestuosos jardines rodeados de araucarias centenarias.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
+                        <div class="p-6 bg-warmWhite/60 backdrop-blur-md rounded-xl border border-gold-400/20 shadow-sm">
+                            <i class="fa-solid fa-dove text-gold-500 text-xl mb-3"></i>
+                            <h4 class="font-semibold text-olive-900 text-sm">Bodas Campestres</h4>
+                            <p class="text-xs text-olive-800/70 mt-1">Ceremonias al aire libre y banquetes señoriales.</p>
+                        </div>
+                        <div class="p-6 bg-warmWhite/60 backdrop-blur-md rounded-xl border border-gold-400/20 shadow-sm">
+                            <i class="fa-solid fa-handshake-angle text-gold-500 text-xl mb-3"></i>
+                            <h4 class="font-semibold text-olive-900 text-sm">Corporativos de Lujo</h4>
+                            <p class="text-xs text-olive-800/70 mt-1">Lanzamientos de marcas, team buildings y retiros de alta dirección.</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 flex justify-center lg:justify-start">
+                        <button onclick="openBooking()" class="bg-olive-800 hover:bg-olive-900 text-warmWhite font-semibold tracking-wider text-xs uppercase px-8 py-4 rounded-full transition-all duration-300">
+                            Cotizar Mi Evento
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Visual Magazine style -->
+                <div class="order-1 lg:order-2 relative reveal">
+                    <div class="overflow-hidden rounded-2xl shadow-2xl group">
+                        <img src="./public/eventos/boda-campo.jpg" 
+                             alt="Detalle de mesa de casamiento elegante en el campo" 
+                             class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-1000"
+                             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1469371670807-013ccf25f16a?q=80&w=1200'">
+                    </div>
+                    <!-- Small floating badge overlay -->
+                    <div class="absolute -bottom-6 -left-6 bg-warmWhite p-6 rounded-2xl shadow-xl border border-gold-400/20 hidden sm:block max-w-[240px]">
+                        <p class="font-serif text-lg italic text-olive-900">"El lugar donde los sueños de unión cobran inmortalidad."</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Galería Cinemática (Editorial Masonry Grid) -->
+    <section id="galeria" class="py-16 lg:py-32 px-6 lg:px-16 bg-warmWhite">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16 lg:mb-20 reveal">
+                <span class="text-gold-600 uppercase tracking-widest text-xs font-semibold block mb-2">Instantáneas de Ensueño</span>
+                <h3 class="font-serif text-4xl lg:text-5xl text-olive-900">La Vida en La Herencia</h3>
+                <div class="w-12 h-[1px] bg-gold-400 mx-auto mt-4 mb-4"></div>
+                <p class="text-olive-800/70 text-sm">
+                    Un vistazo a la atmósfera idílica de nuestra estancia a través de la lente artística.
+                </p>
+            </div>
+
+            <!-- Dynamic grid gallery (Masonry simulation) with images from all sections -->
+            <div id="galleryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Populated by JS on load -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. CTA Final Emocional -->
+    <section class="relative py-28 lg:py-40 bg-olive-950 text-warmWhite flex items-center justify-center text-center overflow-hidden">
+        <!-- Cinematic dark visual background -->
+        <div class="absolute inset-0 z-0 opacity-30">
+            <img src="./public/hero/atardecer-campo.jpg" alt="Campo atardecer dorado" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1600'">
+        </div>
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-t from-olive-950 via-olive-950/90 to-olive-950 z-10"></div>
+
+        <div class="relative z-20 px-6 max-w-4xl mx-auto space-y-8 reveal">
+            <span class="text-gold-400 uppercase tracking-[0.3em] text-xs font-semibold block">Su Membresía le Aguarda</span>
+            <h2 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-light leading-none">
+                Viví una experiencia única en <br>
+                <span class="italic font-light text-gold-100">el corazón sublime del campo.</span>
+            </h2>
+            <div class="w-16 h-[1px] bg-gold-400 mx-auto"></div>
+            <p class="text-beige-200/80 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                Únase hoy a nuestra selecta comunidad de socios y empiece a gozar de los atardeceres dorados y la calidez del hogar criollo con los servicios de un resort internacional de primer nivel.
+            </p>
+            <div class="pt-4">
+                <button onclick="openBooking()" class="bg-gold-400 hover:bg-gold-500 text-olive-950 font-semibold tracking-wider text-xs uppercase px-10 py-5 rounded-full transition-all duration-300 shadow-2xl hover:shadow-gold-500/20 hover:-translate-y-0.5">
+                    Reservar Ahora Mi Visita
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Footer Premium -->
+    <footer class="bg-olive-950 text-warmWhite pt-20 pb-10 px-6 lg:px-16 border-t border-warmWhite/5 relative">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- Grid Contacts, Navigation, Timings -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 pb-16 border-b border-warmWhite/5">
+                
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-6">
+                    <a href="#" class="flex flex-col items-start focus:outline-none">
+                        <span class="font-serif text-3xl font-light tracking-wide text-warmWhite">La Herencia</span>
+                        <span class="text-[10px] tracking-[0.3em] uppercase text-gold-400">Club de Campo</span>
+                    </a>
+                    <p class="text-beige-200/60 text-xs leading-relaxed max-w-xs">
+                        Una herencia criolla viva, donde la tranquilidad de la pampa se encuentra con las experiencias más refinadas de confort y distinción.
+                    </p>
+                    <div class="flex space-x-4 text-warmWhite/50">
+                        <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-instagram text-lg"></i></a>
+                        <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-facebook-f text-lg"></i></a>
+                        <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-linkedin-in text-lg"></i></a>
+                        <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-whatsapp text-lg"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation Links -->
+                <div class="space-y-4">
+                    <h4 class="text-gold-400 font-serif text-lg tracking-wider">El Club</h4>
+                    <ul class="space-y-2 text-xs text-beige-200/75 font-light">
+                        <li><a href="#sobre-nosotros" class="hover:text-gold-400 transition-colors">Sobre Nosotros</a></li>
+                        <li><a href="#experiencias" class="hover:text-gold-400 transition-colors">Deportes & Actividades</a></li>
+                        <li><a href="#gastronomia" class="hover:text-gold-400 transition-colors">Gastronomía & Cava</a></li>
+                        <li><a href="#polo" class="hover:text-gold-400 transition-colors">Caballerizas & Polo</a></li>
+                        <li><a href="#eventos" class="hover:text-gold-400 transition-colors">Salón de Ocasiones</a></li>
+                        <li><a href="#galeria" class="hover:text-gold-400 transition-colors">Galería Fotográfica</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Contact Details -->
+                <div class="space-y-4">
+                    <h4 class="text-gold-400 font-serif text-lg tracking-wider">Contacto & Reservas</h4>
+                    <ul class="space-y-3 text-xs text-beige-200/75 font-light">
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-location-dot mt-0.5 text-gold-400"></i>
+                            <span>Ruta Provincial 41, Km 120, San Antonio de Areco, Buenos Aires, Argentina.</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fa-solid fa-phone text-gold-400"></i>
+                            <span>+54 (11) 5245-8890</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fa-solid fa-envelope text-gold-400"></i>
+                            <span>recepcion@laherenciaclub.com.ar</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Timings & News -->
+                <div class="space-y-4">
+                    <h4 class="text-gold-400 font-serif text-lg tracking-wider">Novedades y Acceso</h4>
+                    <p class="text-xs text-beige-200/60 leading-relaxed font-light">
+                        Abierto de Miércoles a Domingo y feriados de 09:00 a 23:00 hs. Admisión con reserva previa.
+                    </p>
+                    <div class="relative mt-2">
+                        <input type="email" placeholder="Su correo exclusivo..." class="w-full bg-warmWhite/5 border border-warmWhite/15 text-xs text-warmWhite placeholder:text-warmWhite/30 px-4 py-3 rounded-full focus:outline-none focus:border-gold-400 transition-colors">
+                        <button class="absolute right-1 top-1 bottom-1 bg-gold-400 hover:bg-gold-500 text-olive-950 text-[10px] uppercase font-bold tracking-widest px-4 rounded-full transition-colors">
+                            Unirse
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer Bottom legal info -->
+            <div class="pt-8 flex flex-col md:flex-row items-center justify-between text-[10px] text-beige-200/40 uppercase tracking-widest font-light space-y-4 md:space-y-0">
+                <p>&copy; 2026 La Herencia Estancia & Club de Campo. Todos los derechos reservados.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-gold-400 transition-colors">Políticas de Privacidad</a>
+                    <a href="#" class="hover:text-gold-400 transition-colors">Términos del Club</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Cinematic Fullscreen Reservation Modal / Drawer -->
+    <div id="bookingModal" class="fixed inset-0 z-50 bg-olive-950/90 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500 flex items-center justify-center p-4">
+        <div class="bg-warmWhite rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl relative transform translate-y-8 transition-all duration-500" id="bookingContent">
+            
+            <!-- Top Elegant Accent Bar -->
+            <div class="h-1.5 bg-gradient-to-r from-gold-400 via-olive-800 to-gold-400"></div>
+            
+            <!-- Close Button -->
+            <button onclick="closeBooking()" class="absolute top-4 right-4 text-olive-900/60 hover:text-olive-900 w-10 h-10 flex items-center justify-center rounded-full hover:bg-olive-900/5 transition-all focus:outline-none">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Modal Inner Container -->
+            <div class="p-8 sm:p-12 space-y-6">
+                <div class="text-center space-y-2">
+                    <span class="text-gold-600 uppercase tracking-widest text-[10px] font-semibold block">Alta Selección</span>
+                    <h3 class="font-serif text-3xl sm:text-4xl text-olive-900">Iniciar Solicitud de Visita</h3>
+                    <p class="text-xs text-olive-800/70 max-w-sm mx-auto">Nuestro personal le asignará un asesor personalizado para coordinar cada detalle de su estadía.</p>
+                </div>
+
+                <!-- Custom Elegant Form (No alerts allowed) -->
+                <form id="reservationForm" onsubmit="handleReservationSubmit(event)" class="space-y-4 pt-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-[10px] uppercase tracking-widest font-semibold text-olive-900/60">Nombre Completo</label>
+                            <input type="text" required class="w-full bg-olive-50 border border-olive-900/10 rounded-xl px-4 py-3 text-sm text-olive-950 focus:outline-none focus:ring-1 focus:ring-gold-400 focus:border-gold-400 transition-all">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] uppercase tracking-widest font-semibold text-olive-900/60">Correo Electrónico</label>
+                            <input type="email" required class="w-full bg-olive-50 border border-olive-900/10 rounded-xl px-4 py-3 text-sm text-olive-950 focus:outline-none focus:ring-1 focus:ring-gold-400 focus:border-gold-400 transition-all">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-[10px] uppercase tracking-widest font-semibold text-olive-900/60">Teléfono de Contacto</label>
+                            <input type="tel" required class="w-full bg-olive-50 border border-olive-900/10 rounded-xl px-4 py-3 text-sm text-olive-950 focus:outline-none focus:ring-1 focus:ring-gold-400 focus:border-gold-400 transition-all">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] uppercase tracking-widest font-semibold text-olive-900/60">Fecha Deseada</label>
+                            <input type="date" required class="w-full bg-olive-50 border border-olive-900/10 rounded-xl px-4 py-3 text-sm text-olive-950 focus:outline-none focus:ring-1 focus:ring-gold-400 focus:border-gold-400 transition-all">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-[10px] uppercase tracking-widest font-semibold text-olive-900/60">Tipo de Experiencia</label>
+                            <select required class="w-full bg-olive-50 border border-olive-900/10 rounded-xl px-4 py-3 text-sm text-olive-950 focus:outline-none focus:ring-1 focus:ring-gold-400 focus:border-gold-400 transition-all">
+                                <option value="" disabled selected>Seleccione experiencia...</option>
+                                <option value="dia-estancia">Día de Estancia & Spa</option>
+                                <option value="polo-clinic">Polo Clinic & Cabalgatas</option>
+                                <option value="gastronomia">Experiencia Gastronómica & Cava</option>
+                                <option value="evento">Celebración o Evento Corporativo</option>
+                                <option value="visita-socio">Candidatura de Membresía</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] uppercase tracking-widest font-semibold text-olive-900/60">Cantidad de Invitados</label>
+                            <select required class="w-full bg-olive-50 border border-olive-900/10 rounded-xl px-4 py-3 text-sm text-olive-950 focus:outline-none focus:ring-1 focus:ring-gold-400 focus:border-gold-400 transition-all">
+                                <option value="1">1 Invitado</option>
+                                <option value="2">2 Invitados</option>
+                                <option value="3-5">3 a 5 Invitados</option>
+                                <option value="6+">6 o más Invitados</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-[10px] uppercase tracking-widest font-semibold text-olive-900/60">Detalles o Pedidos Especiales</label>
+                        <textarea rows="3" class="w-full bg-olive-50 border border-olive-900/10 rounded-xl px-4 py-3 text-sm text-olive-950 focus:outline-none focus:ring-1 focus:ring-gold-400 focus:border-gold-400 transition-all" placeholder="Infórmenos sobre alergias alimentarias, requerimientos de polo, etc..."></textarea>
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit" class="w-full bg-olive-800 hover:bg-olive-900 text-warmWhite font-semibold tracking-wider text-xs uppercase py-4 rounded-full transition-all duration-300 shadow-lg">
+                            Enviar Solicitud Privada
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Feedback Success Box (hidden by default) -->
+                <div id="bookingSuccess" class="hidden text-center py-10 space-y-4">
+                    <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto text-3xl">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h4 class="font-serif text-3xl text-olive-950">Solicitud Recibida</h4>
+                    <p class="text-xs text-olive-800/80 max-w-sm mx-auto">Su solicitud fue cargada de manera exitosa en nuestro registro de cortesía. Un asesor de La Herencia se contactará telefónicamente en las próximas 2 horas hábiles.</p>
+                    <button onclick="closeBooking()" class="mt-4 bg-olive-800 text-warmWhite text-xs uppercase font-bold tracking-widest px-8 py-3 rounded-full hover:bg-olive-900 transition-colors">
+                        Entendido
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Viewer Modal -->
+    <div id="galleryModal" class="fixed inset-0 z-[120] bg-black/85 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-500 flex items-center justify-center p-4">
+        <div class="relative max-w-5xl w-full">
+            <button onclick="closeGalleryModal()" class="absolute -top-12 right-0 z-20 text-warmWhite/80 hover:text-warmWhite w-10 h-10 flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+            <button onclick="galleryPrev()" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 text-warmWhite/70 hover:text-warmWhite text-3xl transition-colors">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button onclick="galleryNext()" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 text-warmWhite/70 hover:text-warmWhite text-3xl transition-colors">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <img id="galleryViewerImg" src="" alt="Galería" class="w-full h-auto max-h-[85vh] object-contain rounded-2xl shadow-2xl">
+            <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 z-20 text-warmWhite/60 text-xs tracking-widest uppercase" id="galleryCounter"></div>
+        </div>
+    </div>
+
+    <!-- Experience Modal (Popup con carrusel) -->
+    <div id="expModal" class="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-500 flex items-center justify-center p-4">
+        <div class="bg-warmWhite rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative transform translate-y-6 transition-all duration-500" id="expModalContent">
+            <button onclick="closeExperienceModal()" class="absolute top-3 right-3 z-20 bg-warmWhite/90 text-olive-900/70 w-9 h-9 flex items-center justify-center rounded-full hover:bg-gold-100 hover:text-olive-900 transition-all shadow-md">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="relative group">
+                <div class="exp-carousel flex overflow-x-auto snap-x snap-mandatory scroll-smooth rounded-t-3xl" id="expCarousel"></div>
+                <button onclick="prevExpSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 z-10 bg-warmWhite/90 text-olive-900 w-9 h-9 rounded-full flex items-center justify-center hover:bg-warmWhite transition-all shadow-md opacity-0 group-hover:opacity-100">
+                    <i class="fa-solid fa-chevron-left text-sm"></i>
+                </button>
+                <button onclick="nextExpSlide()" class="absolute right-3 top-1/2 -translate-y-1/2 z-10 bg-warmWhite/90 text-olive-900 w-9 h-9 rounded-full flex items-center justify-center hover:bg-warmWhite transition-all shadow-md opacity-0 group-hover:opacity-100">
+                    <i class="fa-solid fa-chevron-right text-sm"></i>
+                </button>
+                <div class="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-1.5" id="expDots"></div>
+            </div>
+            <div class="p-6 sm:p-8 space-y-5">
+                <div>
+                    <span class="text-gold-600 uppercase tracking-widest text-[10px] font-semibold" id="expTag"></span>
+                    <h3 class="font-serif text-2xl sm:text-3xl text-olive-900 mt-1" id="expTitle"></h3>
+                </div>
+                <p class="text-sm text-olive-800/80 leading-relaxed" id="expDesc"></p>
+                <div>
+                    <h4 class="text-xs uppercase tracking-widest text-olive-900/60 font-semibold mb-3">Características</h4>
+                    <ul class="space-y-2" id="expFeatures"></ul>
+                </div>
+                <a id="expWppBtn" href="#" target="_blank" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-xs font-semibold tracking-wider uppercase px-6 py-3.5 rounded-full transition-all duration-300 shadow-md">
+                    <i class="fa-brands fa-whatsapp text-base"></i>
+                    Consultar por WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Modal (Tabs: Parrilla, Postres, Vinos, Bebidas) -->
+    <div id="menuModal" class="fixed inset-0 z-[110] bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-500 flex items-center justify-center p-4">
+        <div class="bg-warmWhite rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative transform translate-y-6 transition-all duration-500" id="menuModalContent">
+            <button onclick="closeMenuModal()" class="absolute top-3 right-3 z-20 bg-warmWhite/90 text-olive-900/70 w-9 h-9 flex items-center justify-center rounded-full hover:bg-gold-100 hover:text-olive-900 transition-all shadow-md">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="p-6 sm:p-8">
+                <div class="text-center mb-6">
+                    <span class="text-gold-600 uppercase tracking-widest text-[10px] font-semibold">Carta</span>
+                    <h3 class="font-serif text-3xl text-olive-900 mt-1">Menú de Siete Fuegos</h3>
+                </div>
+                <div class="flex border-b border-olive-900/10 mb-6 overflow-x-auto" id="menuTabs">
+                    <button onclick="switchMenuTab('parrilla')" class="tab-btn text-xs uppercase tracking-widest font-semibold px-5 py-3 whitespace-nowrap border-b-2 transition-all duration-300 -mb-[1px]" data-tab="parrilla">Parrilla</button>
+                    <button onclick="switchMenuTab('postres')" class="tab-btn text-xs uppercase tracking-widest font-semibold px-5 py-3 whitespace-nowrap border-b-2 transition-all duration-300 -mb-[1px]" data-tab="postres">Postres</button>
+                    <button onclick="switchMenuTab('vinos')" class="tab-btn text-xs uppercase tracking-widest font-semibold px-5 py-3 whitespace-nowrap border-b-2 transition-all duration-300 -mb-[1px]" data-tab="vinos">Vinos</button>
+                    <button onclick="switchMenuTab('bebidas')" class="tab-btn text-xs uppercase tracking-widest font-semibold px-5 py-3 whitespace-nowrap border-b-2 transition-all duration-300 -mb-[1px]" data-tab="bebidas">Bebidas</button>
+                </div>
+                <div id="menuContent" class="space-y-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vanilla JS Logic -->
+    <script>
+        // DOM Elements
+        const preloadLogo = document.getElementById('preloadLogo');
+        const heroVideo = document.querySelector('#inicio video');
+        if (heroVideo) {
+            heroVideo.addEventListener('canplay', () => {
+                document.getElementById('heroFallbackImg')?.style.setProperty('display', 'none');
+            });
+        }
+        const poloVideo = document.querySelector('#polo video');
+        if (poloVideo) {
+            poloVideo.addEventListener('canplay', () => {
+                document.getElementById('poloFallbackImg')?.style.setProperty('display', 'none');
+            });
+        }
+        const preloadSub = document.getElementById('preloadSub');
+        const preloader = document.getElementById('preloader');
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const bookingModal = document.getElementById('bookingModal');
+        const bookingContent = document.getElementById('bookingContent');
+        const reservationForm = document.getElementById('reservationForm');
+        const bookingSuccess = document.getElementById('bookingSuccess');
+        const customCursor = document.getElementById('customCursor');
+        const customCursorDot = document.getElementById('customCursorDot');
+
+        // Cinematic Loading sequence on load
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if(preloadLogo) preloadLogo.style.opacity = '1';
+                if(preloadLogo) preloadLogo.style.transform = 'translateY(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                if(preloadSub) preloadSub.style.opacity = '1';
+            }, 300);
+
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                preloader.style.pointerEvents = 'none';
+            }, 1500);
+        });
+
+        // Sticky Navbar effect on Scroll (shrink padding, glass is always on)
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                navbar.classList.add('py-1', 'lg:py-2');
+                navbar.classList.remove('py-2', 'lg:py-4');
+            } else {
+                navbar.classList.remove('py-1', 'lg:py-2');
+                navbar.classList.add('py-2', 'lg:py-4');
+            }
+        });
+
+        // Mobile Menu Toggle
+        let isDrawerOpen = false;
+        function toggleMobileMenu() {
+            isDrawerOpen = !isDrawerOpen;
+            if (isDrawerOpen) {
+                mobileDrawer.classList.remove('translate-x-full');
+                mobileMenuBtn.innerHTML = '<i class="fa-solid fa-xmark text-2xl"></i>';
+            } else {
+                mobileDrawer.classList.add('translate-x-full');
+                mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars-staggered text-2xl"></i>';
+            }
+        }
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        // Booking Modal functions
+        function openBooking() {
+            bookingModal.classList.remove('opacity-0', 'pointer-events-none');
+            bookingContent.classList.remove('translate-y-8');
+            bookingContent.classList.add('translate-y-0');
+            // Reset state
+            reservationForm.classList.remove('hidden');
+            bookingSuccess.classList.add('hidden');
+        }
+
+        function closeBooking() {
+            bookingModal.classList.add('opacity-0', 'pointer-events-none');
+            bookingContent.classList.remove('translate-y-0');
+            bookingContent.classList.add('translate-y-8');
+        }
+
+        // Reservation Form Submission handler
+        function handleReservationSubmit(event) {
+            event.preventDefault();
+            // Animate transition inside modal to success view
+            reservationForm.classList.add('hidden');
+            bookingSuccess.classList.remove('hidden');
+        }
+
+        // Custom premium cursor movement logic
+        document.addEventListener('mousemove', (e) => {
+            if (customCursor && customCursorDot) {
+                customCursor.style.left = e.clientX + 'px';
+                customCursor.style.top = e.clientY + 'px';
+                customCursorDot.style.left = e.clientX + 'px';
+                customCursorDot.style.top = e.clientY + 'px';
+            }
+        });
+
+        // Interactive cursor scaling when hovering luxury active elements
+        const hoverables = document.querySelectorAll('a, button, input, select, textarea, .cursor-pointer');
+        hoverables.forEach(elem => {
+            elem.addEventListener('mouseenter', () => {
+                document.body.classList.add('hover-active');
+            });
+            elem.addEventListener('mouseleave', () => {
+                document.body.classList.remove('hover-active');
+            });
+        });
+
+        // Experience Modal Data & Functions
+        const expData = [
+            {
+                tag: 'Deportes de Reyes',
+                title: 'Polo de Clase Mundial',
+                desc: 'Aprenda y juegue en canchas profesionales con la guía de campeones del circuito argentino de polo. Una experiencia única que combina la tradición ecuestre con la excelencia deportiva.',
+                features: ['Canchas profesionales de nivel internacional', 'Instructores campeones del circuito argentino', 'Equipamiento completo de polo', 'Clases para todos los niveles', 'Torneos y partidos de exhibición'],
+                images: ['https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?q=80&w=800', 'https://images.unsplash.com/photo-1518467166-765a0101cc9f?q=80&w=800', 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=800'],
+                wpp: 'https://wa.me/541152458890?text=Hola!%20Quiero%20información%20sobre%20Polo%20de%20Clase%20Mundial'
+            },
+            {
+                tag: 'Aventura Ecuestre',
+                title: 'Cabalgatas al Atardecer',
+                desc: 'Recorra las arboledas centenarias e históricos senderos pampeanos guiados por hábiles jinetes locales. Una conexión profunda con la naturaleza y la tradición gaucha.',
+                features: ['Senderos pampeanos históricos', 'Guías jinetes locales expertos', 'Caballos de pura sangre bien entrenados', 'Atardeceres inolvidables sobre la pampa', 'Grupos reducidos y personalizados'],
+                images: ['https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=800', 'https://images.unsplash.com/photo-1518467166-765a0101cc9f?q=80&w=800', 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=800'],
+                wpp: 'https://wa.me/541152458890?text=Hola!%20Quiero%20información%20sobre%20Cabalgatas%20al%20Atardecer'
+            },
+            {
+                tag: 'Alta Cocina',
+                title: 'Parrilla Premium & Cava',
+                desc: 'Cortes madurados cocidos lentamente a la leña, acompañados por joyas de la viticultura argentina. Una experiencia gastronómica que celebra el fuego y la tierra.',
+                features: ['Cortes madurados durante 35 días', 'Cava subterránea con 300+ etiquetas', 'Parrilla de leña tradicional', 'Pastelería criolla artesanal', 'Maridajes exclusivos con sommelier'],
+                images: ['https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800', 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=800', 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800'],
+                wpp: 'https://wa.me/541152458890?text=Hola!%20Quiero%20información%20sobre%20Parrilla%20Premium%20y%20Cava'
+            },
+            {
+                tag: 'Resort de Bienestar',
+                title: 'Oasis & Solarium',
+                desc: 'Piscinas cristalinas bordeadas de reposeras refinadas y barra de coctelería botánica. El lugar perfecto para desconectar y renovar energías.',
+                features: ['Infinity pool con vista panorámica al valle', 'Jacuzzi térmico al aire libre', 'Barra de cócteles botánicos exclusivos', 'Servicio de solarium dedicado', 'Toallas y amenities de cortesía'],
+                images: ['https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=800', 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800', 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800'],
+                wpp: 'https://wa.me/541152458890?text=Hola!%20Quiero%20información%20sobre%20Oasis%20y%20Solarium'
+            },
+            {
+                tag: 'Celebraciones',
+                title: 'Fiestas & Bodas Privadas',
+                desc: 'Bodas memorables y galas corporativas enmarcadas por majestuosos horizontes verdes. Un escenario inigualable para sus momentos más especiales.',
+                features: ['Ceremonias al aire libre en la pampa', 'Banquetes señoriales con catering premium', 'Jardines rodeados de araucarias centenarias', 'Salones coloniales de refinado estilo', 'Coordinación integral de eventos'],
+                images: ['https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=800', 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?q=80&w=800', 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800'],
+                wpp: 'https://wa.me/541152458890?text=Hola!%20Quiero%20información%20sobre%20Fiestas%20y%20Bodas%20Privadas'
+            },
+            {
+                tag: 'Legado Familiar',
+                title: 'Recreación & Club House',
+                desc: 'Deportes al aire libre, club de niños, canchas de tenis de polvo de ladrillo e integración social. Un espacio diseñado para el disfrute de toda la familia.',
+                features: ['Canchas de tenis de polvo de ladrillo', 'Club de niños con actividades supervisadas', 'Deportes al aire libre y recreación', 'Áreas de integración social y familiar', 'Club house con juegos y gastronomía'],
+                images: ['https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=800', 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800', 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=800'],
+                wpp: 'https://wa.me/541152458890?text=Hola!%20Quiero%20información%20sobre%20Recreación%20y%20Club%20House'
+            }
+        ];
+        let expCurrentSlide = 0;
+
+        function openExperienceModal(btn) {
+            const card = btn.closest('.group.relative');
+            const cards = Array.from(document.querySelectorAll('#experiencias .group.relative'));
+            const idx = cards.indexOf(card);
+            const data = expData[idx];
+            if (!data) return;
+
+            const modal = document.getElementById('expModal');
+            const content = document.getElementById('expModalContent');
+            document.getElementById('expTag').textContent = data.tag;
+            document.getElementById('expTitle').textContent = data.title;
+            document.getElementById('expDesc').textContent = data.desc;
+
+            const featList = document.getElementById('expFeatures');
+            featList.innerHTML = data.features.map(f => '<li class="flex items-start gap-2 text-sm text-olive-800/80"><i class="fa-solid fa-check text-gold-500 mt-0.5 text-xs"></i>' + f + '</li>').join('');
+
+            document.getElementById('expWppBtn').href = data.wpp;
+
+            const carousel = document.getElementById('expCarousel');
+            carousel.innerHTML = data.images.map((img, i) => '<img src="' + img + '" alt="Foto ' + (i+1) + '" class="w-full shrink-0 aspect-[16/10] object-cover" data-index="' + i + '">').join('');
+            
+            const dots = document.getElementById('expDots');
+            dots.innerHTML = data.images.map((_, i) => '<span class="w-2 h-2 rounded-full ' + (i === 0 ? 'bg-gold-400' : 'bg-warmWhite/60') + ' transition-all cursor-pointer" onclick="goExpSlide(' + i + ')"></span>').join('');
+            
+            expCurrentSlide = 0;
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            content.classList.remove('translate-y-6');
+            content.classList.add('translate-y-0');
+        }
+
+        function closeExperienceModal() {
+            const modal = document.getElementById('expModal');
+            const content = document.getElementById('expModalContent');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            content.classList.remove('translate-y-0');
+            content.classList.add('translate-y-6');
+        }
+
+        function goExpSlide(n) {
+            const carousel = document.getElementById('expCarousel');
+            const imgs = carousel.querySelectorAll('img');
+            if (n < 0) n = imgs.length - 1;
+            if (n >= imgs.length) n = 0;
+            expCurrentSlide = n;
+            imgs[n].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            const dots = document.getElementById('expDots').querySelectorAll('span');
+            dots.forEach((d, i) => d.className = 'w-2 h-2 rounded-full ' + (i === n ? 'bg-gold-400' : 'bg-warmWhite/60') + ' transition-all cursor-pointer');
+        }
+
+        function nextExpSlide() { goExpSlide(expCurrentSlide + 1); }
+        function prevExpSlide() { goExpSlide(expCurrentSlide - 1); }
+
+        // Close modal on backdrop click
+        document.getElementById('expModal')?.addEventListener('click', function(e) {
+            if (e.target === this) closeExperienceModal();
+        });
+
+        // Menu Modal Data & Functions
+        const menuData = {
+            parrilla: [
+                { name: 'Asado de Tira', desc: 'Tira de asado madurada 35 días, cocida a las brasas lentas.', price: '$18.500' },
+                { name: 'Bife de Chorizo', desc: 'Corte angosto de 400g, sellado a la parrilla con chimichurri.', price: '$22.000' },
+                { name: 'Matambre a la Leña', desc: 'Matambre arrollado relleno de verduras asadas y hierbas.', price: '$16.500' },
+                { name: 'Entraña a la Parmesana', desc: 'Entraña cubierta con parmesano gratinado y rúcula.', price: '$19.000' },
+                { name: 'Provoleta', desc: 'Provolone a la parrilla con orégano y tomates asados.', price: '$6.500' },
+                { name: 'Chorizo Criollo', desc: 'Chorizo artesanal de cerdo con pan casero y salsa criolla.', price: '$5.500' }
+            ],
+            postres: [
+                { name: 'Flan con Dulce de Leche', desc: 'Flan casero bañado en dulce de leche artesanal.', price: '$5.500' },
+                { name: 'Panqueques con DDL y Nueces', desc: 'Panqueques tibios rellenos de dulce de leche y nueces caramelizadas.', price: '$6.000' },
+                { name: 'Helado Artesanal', desc: 'Selección de sabores: dulce de leche, chocolate, frutilla y limón.', price: '$4.500' },
+                { name: 'Chocotorta de la Abuela', desc: 'Chocotorta tradicional con capas de crema y chocolate.', price: '$5.000' },
+                { name: 'Budín de Pan con Vino Dulce', desc: 'Budín de pan casero con salsa de vino dulce y canela.', price: '$5.500' }
+            ],
+            vinos: [
+                { name: 'Catena Zapata Malbec', desc: 'Luján de Cuyo, Mendoza. Cuerpo completo con notas a ciruela y especias.', price: '$14.000' },
+                { name: 'Nieto Senetiner Cabernet', desc: 'Valle de Uco, Mendoza. Roble intenso con taninos sedosos.', price: '$12.500' },
+                { name: 'El Porvenir de Cafayate Torrontés', desc: 'Salta. Blanco floral y fresco con notas cítricas.', price: '$9.500' },
+                { name: 'Bodega Noemia Malbec', desc: 'Río Negro. Elegante y profundo, con paso por barrica.', price: '$32.000' },
+                { name: 'Chandon Extra Brut', desc: 'Espumante clásico de Gualtallary, ideal para celebrar.', price: '$11.000' }
+            ],
+            bebidas: [
+                { name: 'Agua Saborizada', desc: 'Agua mineral con hierbas de la huerta orgánica.', price: '$3.000' },
+                { name: 'Limonada Natural', desc: 'Limonada fresca con menta y jengibre.', price: '$3.500' },
+                { name: 'Fernet Branca con Coca', desc: 'Clásico aperitivo argentino servido con hielo.', price: '$4.500' },
+                { name: 'Gin Tonic Premium', desc: 'Gin Bombay Sapphire con tónica, pepino y enebro.', price: '$6.500' },
+                { name: 'Café de Especialidad', desc: 'Café de origen único tostado artesanalmente.', price: '$3.000' }
+            ]
+        };
+
+        function switchMenuTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active', 'border-gold-400', 'text-olive-900'));
+            document.querySelectorAll('.tab-btn').forEach(b => { b.classList.add('border-transparent', 'text-olive-800/60'); });
+            const btn = document.querySelector(`.tab-btn[data-tab="${tab}"]`);
+            if (btn) { btn.classList.add('active', 'border-gold-400', 'text-olive-900'); btn.classList.remove('border-transparent', 'text-olive-800/60'); }
+            
+            const container = document.getElementById('menuContent');
+            container.innerHTML = menuData[tab].map(item => 
+                '<div class="menu-item pb-4 flex items-start justify-between gap-4">' +
+                '<div><h4 class="font-semibold text-sm text-olive-900">' + item.name + '</h4>' +
+                '<p class="text-xs text-olive-800/70 mt-0.5">' + item.desc + '</p></div>' +
+                '<span class="text-sm font-semibold text-gold-600 whitespace-nowrap shrink-0">' + item.price + '</span></div>'
+            ).join('');
+        }
+
+        function openMenuModal() {
+            const modal = document.getElementById('menuModal');
+            const content = document.getElementById('menuModalContent');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            content.classList.remove('translate-y-6');
+            content.classList.add('translate-y-0');
+            switchMenuTab('parrilla');
+        }
+
+        function closeMenuModal() {
+            const modal = document.getElementById('menuModal');
+            const content = document.getElementById('menuModalContent');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            content.classList.remove('translate-y-0');
+            content.classList.add('translate-y-6');
+        }
+
+        document.getElementById('menuModal')?.addEventListener('click', function(e) {
+            if (e.target === this) closeMenuModal();
+        });
+
+        // Sync carousel scroll with dots
+        document.getElementById('expCarousel')?.addEventListener('scroll', function() {
+            const imgs = this.querySelectorAll('img');
+            let closest = 0;
+            let minDist = Infinity;
+            imgs.forEach((img, i) => {
+                const dist = Math.abs(img.getBoundingClientRect().left - this.getBoundingClientRect().left);
+                if (dist < minDist) { minDist = dist; closest = i; }
+            });
+            if (closest !== expCurrentSlide) {
+                expCurrentSlide = closest;
+                const dots = document.getElementById('expDots')?.querySelectorAll('span');
+                if (dots) dots.forEach((d, i) => d.className = 'w-2 h-2 rounded-full ' + (i === closest ? 'bg-gold-400' : 'bg-warmWhite/60') + ' transition-all cursor-pointer');
+            }
+        });
+
+        // Gallery Modal
+        let galleryImages = [];
+        let galleryCurrent = 0;
+
+        function openGalleryModal(el) {
+            const imgs = Array.from(document.querySelectorAll('#galeria .group.relative.cursor-pointer img'));
+            const idx = imgs.indexOf(el.querySelector('img'));
+            if (idx === -1) return;
+            galleryImages = imgs.map(i => i.getAttribute('src'));
+            galleryCurrent = idx;
+            showGalleryImage();
+            document.getElementById('galleryModal').classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function showGalleryImage() {
+            const img = document.getElementById('galleryViewerImg');
+            img.style.opacity = '0';
+            setTimeout(() => {
+                img.src = galleryImages[galleryCurrent];
+                img.style.opacity = '1';
+            }, 150);
+            document.getElementById('galleryCounter').textContent = (galleryCurrent + 1) + ' / ' + galleryImages.length;
+        }
+
+        function galleryNext() { galleryCurrent = (galleryCurrent + 1) % galleryImages.length; showGalleryImage(); }
+        function galleryPrev() { galleryCurrent = (galleryCurrent - 1 + galleryImages.length) % galleryImages.length; showGalleryImage(); }
+
+        function closeGalleryModal() {
+            document.getElementById('galleryModal').classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeGalleryModal();
+            if (e.key === 'ArrowRight') galleryNext();
+            if (e.key === 'ArrowLeft') galleryPrev();
+        });
+
+        // Attach click to gallery images
+        document.querySelectorAll('#galeria .group.relative.cursor-pointer').forEach(el => {
+            el.addEventListener('click', () => openGalleryModal(el));
+        });
+
+        // Close gallery on backdrop
+        document.getElementById('galleryModal')?.addEventListener('click', function(e) {
+            if (e.target === this) closeGalleryModal();
+        });
+
+        // Gastro Carousel Autoplay
+        let gastroIdx = 0;
+        let gastroInterval;
+        const gastroTrack = document.getElementById('gastroCarousel');
+        const gastroDots = () => document.querySelector('#gastronomia .flex.gap-1\\.5')?.querySelectorAll('span');
+
+        function gastroGo(n) {
+            if (!gastroTrack) return;
+            const imgs = gastroTrack.querySelectorAll('img');
+            if (n < 0) n = imgs.length - 1;
+            if (n >= imgs.length) n = 0;
+            gastroIdx = n;
+            gastroTrack.style.transform = 'translateX(-' + (n * 100) + '%)';
+            gastroDots()?.forEach((d, i) => {
+                d.className = 'w-2 h-2 rounded-full ' + (i === n ? 'bg-gold-400' : 'bg-warmWhite/60') + ' transition-all cursor-pointer';
+            });
+        }
+        function gastroNext() { gastroGo(gastroIdx + 1); }
+        function gastroPrev() { gastroGo(gastroIdx - 1); }
+
+        function startGastroAuto() {
+            stopGastroAuto();
+            gastroInterval = setInterval(() => gastroGo(gastroIdx + 1), 4000);
+        }
+        function stopGastroAuto() { clearInterval(gastroInterval); }
+
+        if (gastroTrack) {
+            startGastroAuto();
+            document.querySelector('#gastronomia .group')?.addEventListener('mouseenter', stopGastroAuto);
+            document.querySelector('#gastronomia .group')?.addEventListener('mouseleave', startGastroAuto);
+        }
+
+        // Cintilla Autoplay
+        const cintillaWords = [
+            'Club de Campo',
+            'Polo',
+            'Restaurant & Parrilla',
+            'Piletas',
+            'Paseos en Caballo'
+        ];
+        let cintillaIdx = 0;
+        const cintillaText = document.getElementById('cintillaText');
+        const cintillaNext = document.getElementById('cintillaNext');
+        const cintillaPrev = document.getElementById('cintillaPrev');
+        const cintillaPrevBar = document.getElementById('cintillaPrevBar');
+
+        function updateCintilla() {
+            const prevIdx = (cintillaIdx - 1 + cintillaWords.length) % cintillaWords.length;
+            const nextIdx = (cintillaIdx + 1) % cintillaWords.length;
+            if (cintillaText) {
+                cintillaText.style.opacity = '0';
+                setTimeout(() => {
+                    cintillaText.textContent = cintillaWords[cintillaIdx];
+                    cintillaText.style.opacity = '1';
+                }, 150);
+            }
+            if (cintillaNext) cintillaNext.textContent = cintillaWords[nextIdx];
+            if (cintillaPrev) cintillaPrev.textContent = cintillaWords[prevIdx];
+            if (cintillaPrevBar) cintillaPrevBar.classList.remove('hidden');
+            const dotParent = document.querySelector('#cintillaSection .flex.gap-1\\.5');
+            if (dotParent) {
+                dotParent.querySelectorAll('span').forEach((d, i) => {
+                    d.className = i === cintillaIdx ? 'w-1.5 h-1.5 rounded-full bg-gold-400 transition-all' : 'w-1.5 h-1.5 rounded-full bg-olive-800/20 transition-all';
+                });
+            }
+            cintillaIdx = (cintillaIdx + 1) % cintillaWords.length;
+        }
+
+        if (cintillaText) {
+            cintillaText.textContent = cintillaWords[0];
+            cintillaText.style.opacity = '1';
+            if (cintillaNext) cintillaNext.textContent = cintillaWords[1];
+            if (cintillaPrev) cintillaPrev.textContent = cintillaWords[cintillaWords.length - 1];
+            setInterval(updateCintilla, 3500);
+        }
+
+        // Random Gallery from existing section images (mezcla al azar)
+        (function() {
+            const allImages = [
+                { src: './public/experiencias/polodeclasemundial.webp', alt: 'Polo de clase mundial', fallback: 'https://images.unsplash.com/photo-1518467166-765a0101cc9f?q=80&w=600' },
+                { src: './public/experiencias/Cabalgataalatardecer.jpg', alt: 'Cabalgata al atardecer', fallback: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=600' },
+                { src: './public/experiencias/parrillapremiumycava.jpg', alt: 'Parrilla premium y cava', fallback: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=600' },
+                { src: './public/experiencias/Recreacion.png', alt: 'Familia y recreación', fallback: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=600' },
+                { src: './public/gastronomia/imagen1-gastronomia.png', alt: 'Gastronomía de autor', fallback: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=600' },
+                { src: './public/gastronomia/imagen2-gastronomia.png', alt: 'Chef en acción', fallback: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600' },
+                { src: './public/gastronomia/imagen3gastronomia.png', alt: 'Maridaje y vinos', fallback: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=600' },
+                { src: './public/piscinas/relax.png', alt: 'Piscina infinity pool', fallback: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=600' },
+                { src: './public/sobre-nosotros/Imagen1elclub-.png', alt: 'La estancia', fallback: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=600' },
+                { src: './public/sobre-nosotros/imagen2-elclub.png', alt: 'Arquitectura del club', fallback: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=600' },
+                { src: './public/sobre-nosotros/imagen3-elclub.png', alt: 'Atardecer en los campos', fallback: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=600' }
+            ];
+
+            // Fisher-Yates shuffle
+            function shuffle(arr) {
+                for (let i = arr.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                }
+                return arr;
+            }
+
+            const shuffled = shuffle([...allImages]);
+            const selected = shuffled.slice(0, 8);
+            const heights = [320, 220, 220, 320, 320, 220, 220, 320];
+            const delays = ['', 'delay-100', '', 'delay-100', '', 'delay-100', '', 'delay-100'];
+
+            const cols = [
+                { items: [0, 1], offset: false },
+                { items: [2, 3], offset: true },
+                { items: [4, 5], offset: false },
+                { items: [6, 7], offset: true }
+            ];
+
+            const grid = document.getElementById('galleryGrid');
+            grid.innerHTML = cols.map(col => {
+                const offsetClass = col.offset ? 'lg:-translate-y-8' : '';
+                return `<div class="space-y-6 ${offsetClass}">${col.items.map(idx => {
+                    const img = selected[idx];
+                    return `<div class="overflow-hidden rounded-2xl shadow-md group relative cursor-pointer reveal ${delays[idx]}">
+                        <img src="${img.src}" alt="${img.alt}" class="w-full h-[${heights[idx]}px] object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null;this.src='${img.fallback}'">
+                        <div class="absolute inset-0 bg-olive-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <i class="fa-solid fa-magnifying-glass-plus text-warmWhite text-2xl"></i>
+                        </div>
+                    </div>`;
+                }).join('')}</div>`;
+            }).join('');
+        })();
+
+        // Cinematic scroll reveal trigger logic using IntersectionObserver
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Trigger only once for smoother feeling
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealOnScroll.observe(el));
+    </script>
+</body>
+</html>
