@@ -1,4 +1,16 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "routes": [
+    {
+      "src": "/public/(.*)",
+      "dest": "/public/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)\\.(jpg|jpeg|png|webp|gif|svg|ico|mp4|webm|ogg)",
