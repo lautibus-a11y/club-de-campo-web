@@ -54,6 +54,7 @@
                         'fade-in-up': 'fadeInUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
                         'scale-up': 'scaleUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
                         'subtle-drift': 'subtleDrift 20s ease-in-out infinite alternate',
+                        'marquee': 'marquee 40s linear infinite',
                     },
                     keyframes: {
                         fadeInUp: {
@@ -67,6 +68,10 @@
                         subtleDrift: {
                             '0%': { transform: 'scale(1) translate(0px, 0px)' },
                             '100%': { transform: 'scale(1.06) translate(10px, -10px)' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' }
                         }
                     }
                 }
@@ -308,26 +313,26 @@
         </div>
     </section>
 
-    <!-- Cintilla Glassmorph Autoplay -->
-    <section id="cintillaSection" class="relative z-10">
-        <div class="bg-white/40 backdrop-blur-xl border-y border-white/30 py-4 lg:py-5 overflow-hidden">
-            <div class="max-w-7xl mx-auto px-6 lg:px-16 flex items-center justify-center lg:justify-between gap-4 lg:gap-8">
-                <span class="hidden lg:inline text-[9px] uppercase tracking-[0.4em] text-olive-800/40 font-semibold shrink-0">Viví</span>
-                <div class="flex items-center gap-3 lg:gap-6 overflow-hidden">
-                    <span id="cintillaPrev" class="text-[10px] lg:text-xs text-olive-800/40 uppercase tracking-[0.15em] whitespace-nowrap transition-all duration-300 hidden sm:inline"></span>
-                    <span id="cintillaPrevBar" class="w-px h-4 bg-gold-400/60 hidden sm:inline-block"></span>
-                    <span id="cintillaText" class="text-sm lg:text-base text-olive-900 font-semibold uppercase tracking-[0.1em] whitespace-nowrap transition-all duration-300">Club de Campo</span>
-                    <span class="w-px h-5 bg-gold-400/60"></span>
-                    <span id="cintillaNext" class="text-[10px] lg:text-xs text-olive-800/40 uppercase tracking-[0.15em] whitespace-nowrap transition-all duration-300 hidden sm:inline"></span>
-                </div>
-                <div class="flex gap-1.5 sm:hidden">
-                    <span class="w-1.5 h-1.5 rounded-full bg-gold-400 transition-all"></span>
-                    <span class="w-1.5 h-1.5 rounded-full bg-olive-800/20 transition-all"></span>
-                    <span class="w-1.5 h-1.5 rounded-full bg-olive-800/20 transition-all"></span>
-                    <span class="w-1.5 h-1.5 rounded-full bg-olive-800/20 transition-all"></span>
-                    <span class="w-1.5 h-1.5 rounded-full bg-olive-800/20 transition-all"></span>
-                </div>
-                <span class="hidden lg:inline text-[9px] uppercase tracking-[0.4em] text-olive-800/40 font-semibold shrink-0">La Herencia</span>
+    <!-- Cintilla Elegante Continuous Marquee -->
+    <section id="cintillaSection" class="relative z-10 bg-olive-950/95 backdrop-blur-xl border-y border-gold-400/20 py-3 lg:py-4 overflow-hidden shadow-2xl">
+        <div class="flex w-max animate-marquee hover:[animation-play-state:paused] transition-all cursor-default">
+            <!-- Group 1 -->
+            <div class="flex items-center justify-around w-max">
+                <span class="mx-6 lg:mx-12 text-[10px] lg:text-xs uppercase tracking-[0.3em] text-gold-400 font-semibold flex items-center"><i class="fa-solid fa-gem mr-3 text-gold-600/60 text-[8px] lg:text-[10px]"></i>Club de Campo</span>
+                <span class="mx-6 lg:mx-12 text-[10px] lg:text-xs uppercase tracking-[0.3em] text-warmWhite/80 font-light flex items-center"><i class="fa-solid fa-horse mr-3 text-warmWhite/30 text-[8px] lg:text-[10px]"></i>Polo de Clase Mundial</span>
+                <span class="mx-6 lg:mx-12 text-[10px] lg:text-xs uppercase tracking-[0.3em] text-gold-400 font-semibold flex items-center"><i class="fa-solid fa-wine-glass mr-3 text-gold-600/60 text-[8px] lg:text-[10px]"></i>Restaurant & Parrilla</span>
+                <span class="mx-6 lg:mx-12 text-[10px] lg:text-xs uppercase tracking-[0.3em] text-warmWhite/80 font-light flex items-center"><i class="fa-solid fa-water mr-3 text-warmWhite/30 text-[8px] lg:text-[10px]"></i>Oasis & Piscinas</span>
+                <span class="mx-6 lg:mx-12 text-[10px] lg:text-xs uppercase tracking-[0.3em] text-gold-400 font-semibold flex items-center"><i class="fa-solid fa-leaf mr-3 text-gold-600/60 text-[8px] lg:text-[10px]"></i>Naturaleza Pura</span>
+                <span class="mx-6 lg:mx-12 text-[10px] lg:text-xs uppercase tracking-[0.3em] text-warmWhite/80 font-light flex items-center"><i class="fa-solid fa-compass mr-3 text-warmWhite/30 text-[8px] lg:text-[10px]"></i>La Herencia Argentina</span>
+            </div>
+            <!-- Group 2 -->
+            <div class="flex items-center justify-around w-max">
+                <span class="mx-6 lg:mx-12 text-[10px] lg:text-xs uppercase tracking-[0.3em] text-gold-400 font-semibold flex items-center"><i class="fa-solid fa-gem mr-3 text-gold-600/60 text-[8px] lg:text-[10px]"></i>Club de Campo</span>
+                <span class="mx-6 lg:mx-12 text-[10px] lg:text-xs uppercase tracking-[0.3em] text-warmWhite/80 font-light flex items-center"><i class="fa-solid fa-horse mr-3 text-warmWhite/30 text-[8px] lg:text-[10px]"></i>Polo de Clase Mundial</span>
+                <span class="mx-6 lg:mx-12 text-[10px] lg:text-xs uppercase tracking-[0.3em] text-gold-400 font-semibold flex items-center"><i class="fa-solid fa-wine-glass mr-3 text-gold-600/60 text-[8px] lg:text-[10px]"></i>Restaurant & Parrilla</span>
+                <span class="mx-6 lg:mx-12 text-[10px] lg:text-xs uppercase tracking-[0.3em] text-warmWhite/80 font-light flex items-center"><i class="fa-solid fa-water mr-3 text-warmWhite/30 text-[8px] lg:text-[10px]"></i>Oasis & Piscinas</span>
+                <span class="mx-6 lg:mx-12 text-[10px] lg:text-xs uppercase tracking-[0.3em] text-gold-400 font-semibold flex items-center"><i class="fa-solid fa-leaf mr-3 text-gold-600/60 text-[8px] lg:text-[10px]"></i>Naturaleza Pura</span>
+                <span class="mx-6 lg:mx-12 text-[10px] lg:text-xs uppercase tracking-[0.3em] text-warmWhite/80 font-light flex items-center"><i class="fa-solid fa-compass mr-3 text-warmWhite/30 text-[8px] lg:text-[10px]"></i>La Herencia Argentina</span>
             </div>
         </div>
     </section>
@@ -963,28 +968,28 @@
     </footer>
 
     <!-- Cinematic Fullscreen Reservation Modal / Drawer -->
-    <div id="bookingModal" class="fixed inset-0 z-50 bg-olive-950/90 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500 flex items-center justify-center p-4">
-        <div class="bg-warmWhite rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl relative transform translate-y-8 transition-all duration-500" id="bookingContent">
+    <div id="bookingModal" class="fixed inset-0 z-50 bg-olive-950/90 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500 flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-warmWhite rounded-3xl w-full max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative transform translate-y-8 transition-all duration-500" id="bookingContent">
             
             <!-- Top Elegant Accent Bar -->
-            <div class="h-1.5 bg-gradient-to-r from-gold-400 via-olive-800 to-gold-400"></div>
+            <div class="h-1.5 bg-gradient-to-r from-gold-400 via-olive-800 to-gold-400 sticky top-0 z-20"></div>
             
             <!-- Close Button -->
-            <button onclick="closeBooking()" class="absolute top-4 right-4 text-olive-900/60 hover:text-olive-900 w-10 h-10 flex items-center justify-center rounded-full hover:bg-olive-900/5 transition-all focus:outline-none">
+            <button onclick="closeBooking()" class="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 text-olive-900/60 hover:text-olive-900 w-10 h-10 flex items-center justify-center rounded-full hover:bg-olive-900/5 transition-all focus:outline-none bg-warmWhite/80 backdrop-blur-sm">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
 
             <!-- Modal Inner Container -->
-            <div class="p-8 sm:p-12 space-y-6">
-                <div class="text-center space-y-2">
-                    <span class="text-gold-600 uppercase tracking-widest text-[10px] font-semibold block">Alta Selección</span>
-                    <h3 class="font-serif text-3xl sm:text-4xl text-olive-900">Iniciar Solicitud de Visita</h3>
-                    <p class="text-xs text-olive-800/70 max-w-sm mx-auto">Nuestro personal le asignará un asesor personalizado para coordinar cada detalle de su estadía.</p>
+            <div class="p-5 sm:p-12 space-y-4 sm:space-y-6">
+                <div class="text-center space-y-1 sm:space-y-2 mt-4 sm:mt-0">
+                    <span class="text-gold-600 uppercase tracking-widest text-[9px] sm:text-[10px] font-semibold block">Alta Selección</span>
+                    <h3 class="font-serif text-2xl sm:text-4xl text-olive-900">Iniciar Solicitud</h3>
+                    <p class="text-[11px] sm:text-xs text-olive-800/70 max-w-sm mx-auto leading-relaxed">Nuestro personal le asignará un asesor personalizado para coordinar cada detalle de su estadía.</p>
                 </div>
 
                 <!-- Custom Elegant Form (No alerts allowed) -->
-                <form id="reservationForm" onsubmit="handleReservationSubmit(event)" class="space-y-4 pt-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <form id="reservationForm" onsubmit="handleReservationSubmit(event)" class="space-y-3 sm:space-y-4 pt-2 sm:pt-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                         <div class="space-y-1">
                             <label class="text-[10px] uppercase tracking-widest font-semibold text-olive-900/60">Nombre Completo</label>
                             <input type="text" required class="w-full bg-olive-50 border border-olive-900/10 rounded-xl px-4 py-3 text-sm text-olive-950 focus:outline-none focus:ring-1 focus:ring-gold-400 focus:border-gold-400 transition-all">
@@ -1034,8 +1039,8 @@
                         <textarea rows="3" class="w-full bg-olive-50 border border-olive-900/10 rounded-xl px-4 py-3 text-sm text-olive-950 focus:outline-none focus:ring-1 focus:ring-gold-400 focus:border-gold-400 transition-all" placeholder="Infórmenos sobre alergias alimentarias, requerimientos de polo, etc..."></textarea>
                     </div>
 
-                    <div class="pt-2">
-                        <button type="submit" class="w-full bg-olive-800 hover:bg-olive-900 text-warmWhite font-semibold tracking-wider text-xs uppercase py-4 rounded-full transition-all duration-300 shadow-lg">
+                    <div class="pt-1 sm:pt-2">
+                        <button type="submit" class="w-full bg-olive-800 hover:bg-olive-900 text-warmWhite font-semibold tracking-wider text-[10px] sm:text-xs uppercase py-3 sm:py-4 rounded-full transition-all duration-300 shadow-lg">
                             Enviar Solicitud Privada
                         </button>
                     </div>
@@ -1075,9 +1080,9 @@
     </div>
 
     <!-- Experience Modal (Popup con carrusel) -->
-    <div id="expModal" class="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-500 flex items-center justify-center p-4">
-        <div class="bg-warmWhite rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative transform translate-y-6 transition-all duration-500" id="expModalContent">
-            <button onclick="closeExperienceModal()" class="absolute top-3 right-3 z-20 bg-warmWhite/90 text-olive-900/70 w-9 h-9 flex items-center justify-center rounded-full hover:bg-gold-100 hover:text-olive-900 transition-all shadow-md">
+    <div id="expModal" class="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-500 flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-warmWhite rounded-3xl w-full max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative transform translate-y-6 transition-all duration-500" id="expModalContent">
+            <button onclick="closeExperienceModal()" class="absolute top-3 right-3 z-20 bg-warmWhite/90 backdrop-blur-sm text-olive-900/70 w-9 h-9 flex items-center justify-center rounded-full hover:bg-gold-100 hover:text-olive-900 transition-all shadow-md">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
             <div class="relative group">
@@ -1090,7 +1095,7 @@
                 </button>
                 <div class="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-1.5" id="expDots"></div>
             </div>
-            <div class="p-6 sm:p-8 space-y-5">
+            <div class="p-5 sm:p-8 space-y-4 sm:space-y-5">
                 <div>
                     <span class="text-gold-600 uppercase tracking-widest text-[10px] font-semibold" id="expTag"></span>
                     <h3 class="font-serif text-2xl sm:text-3xl text-olive-900 mt-1" id="expTitle"></h3>
@@ -1109,13 +1114,13 @@
     </div>
 
     <!-- Menu Modal (Tabs: Parrilla, Postres, Vinos, Bebidas) -->
-    <div id="menuModal" class="fixed inset-0 z-[110] bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-500 flex items-center justify-center p-4">
-        <div class="bg-warmWhite rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative transform translate-y-6 transition-all duration-500" id="menuModalContent">
-            <button onclick="closeMenuModal()" class="absolute top-3 right-3 z-20 bg-warmWhite/90 text-olive-900/70 w-9 h-9 flex items-center justify-center rounded-full hover:bg-gold-100 hover:text-olive-900 transition-all shadow-md">
+    <div id="menuModal" class="fixed inset-0 z-[110] bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-500 flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-warmWhite rounded-3xl w-full max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative transform translate-y-6 transition-all duration-500" id="menuModalContent">
+            <button onclick="closeMenuModal()" class="absolute top-3 right-3 z-20 bg-warmWhite/90 backdrop-blur-sm text-olive-900/70 w-9 h-9 flex items-center justify-center rounded-full hover:bg-gold-100 hover:text-olive-900 transition-all shadow-md">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
-            <div class="p-6 sm:p-8">
-                <div class="text-center mb-6">
+            <div class="p-5 sm:p-8 pt-10 sm:pt-12">
+                <div class="text-center mb-5 sm:mb-6">
                     <span class="text-gold-600 uppercase tracking-widest text-[10px] font-semibold">Carta</span>
                     <h3 class="font-serif text-3xl text-olive-900 mt-1">Menú de Siete Fuegos</h3>
                 </div>
@@ -1519,49 +1524,7 @@
             document.querySelector('#gastronomia .group')?.addEventListener('mouseleave', startGastroAuto);
         }
 
-        // Cintilla Autoplay
-        const cintillaWords = [
-            'Club de Campo',
-            'Polo',
-            'Restaurant & Parrilla',
-            'Piletas',
-            'Paseos en Caballo'
-        ];
-        let cintillaIdx = 0;
-        const cintillaText = document.getElementById('cintillaText');
-        const cintillaNext = document.getElementById('cintillaNext');
-        const cintillaPrev = document.getElementById('cintillaPrev');
-        const cintillaPrevBar = document.getElementById('cintillaPrevBar');
 
-        function updateCintilla() {
-            const prevIdx = (cintillaIdx - 1 + cintillaWords.length) % cintillaWords.length;
-            const nextIdx = (cintillaIdx + 1) % cintillaWords.length;
-            if (cintillaText) {
-                cintillaText.style.opacity = '0';
-                setTimeout(() => {
-                    cintillaText.textContent = cintillaWords[cintillaIdx];
-                    cintillaText.style.opacity = '1';
-                }, 150);
-            }
-            if (cintillaNext) cintillaNext.textContent = cintillaWords[nextIdx];
-            if (cintillaPrev) cintillaPrev.textContent = cintillaWords[prevIdx];
-            if (cintillaPrevBar) cintillaPrevBar.classList.remove('hidden');
-            const dotParent = document.querySelector('#cintillaSection .flex.gap-1\\.5');
-            if (dotParent) {
-                dotParent.querySelectorAll('span').forEach((d, i) => {
-                    d.className = i === cintillaIdx ? 'w-1.5 h-1.5 rounded-full bg-gold-400 transition-all' : 'w-1.5 h-1.5 rounded-full bg-olive-800/20 transition-all';
-                });
-            }
-            cintillaIdx = (cintillaIdx + 1) % cintillaWords.length;
-        }
-
-        if (cintillaText) {
-            cintillaText.textContent = cintillaWords[0];
-            cintillaText.style.opacity = '1';
-            if (cintillaNext) cintillaNext.textContent = cintillaWords[1];
-            if (cintillaPrev) cintillaPrev.textContent = cintillaWords[cintillaWords.length - 1];
-            setInterval(updateCintilla, 3500);
-        }
 
         // Random Gallery from existing section images (mezcla al azar)
         (function() {
